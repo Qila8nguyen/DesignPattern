@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"projectname/main/builder"
 	"projectname/main/factory"
+	"projectname/main/observer"
 )
 
 func main() {
@@ -11,6 +12,8 @@ func main() {
 
 	var singletonDirector *builder.Director
 	BuilderVisualization(singletonDirector)
+
+	ObserverVisualization()
 }
 
 func FactoryVisualization() {
@@ -37,4 +40,16 @@ func BuilderVisualization(singletonDirector *builder.Director) {
 
 	println(trouser.GetName())
 
+}
+
+func ObserverVisualization() {
+	shirtItem := observer.NewItem("Nike Shirt")
+
+	observerFirst := &observer.Customer{Id: "abc@gmail.com"}
+	observerSecond := &observer.Customer{Id: "xyz@gmail.com"}
+
+	shirtItem.Register(observerFirst)
+	shirtItem.Register(observerSecond)
+
+	shirtItem.UpdateAvailability()
 }
